@@ -116,7 +116,15 @@ func NewNamespaceConfig(
 	global bool,
 	customSearchAttributes map[string]enumspb.IndexedValueType,
 ) (*NamespaceConfig, error) {
-	dbCustomSearchAttributes := searchattribute.GetDBIndexSearchAttributes(nil).CustomSearchAttributes
+	dbCustomSearchAttributes := searchattribute.GetDBIndexSearchAttributes(map[enumspb.IndexedValueType]int{
+		enumspb.INDEXED_VALUE_TYPE_BOOL:         99,
+		enumspb.INDEXED_VALUE_TYPE_INT:          99,
+		enumspb.INDEXED_VALUE_TYPE_DOUBLE:       99,
+		enumspb.INDEXED_VALUE_TYPE_DATETIME:     99,
+		enumspb.INDEXED_VALUE_TYPE_KEYWORD:      99,
+		enumspb.INDEXED_VALUE_TYPE_KEYWORD_LIST: 99,
+		enumspb.INDEXED_VALUE_TYPE_TEXT:         99,
+	}).CustomSearchAttributes
 	fieldToAliasMap := map[string]string{}
 	for saName, saType := range customSearchAttributes {
 		var targetFieldName string

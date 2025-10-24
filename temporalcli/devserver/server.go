@@ -272,6 +272,15 @@ func (s *StartOptions) buildServerConfig() (*config.Config, error) {
 		}
 	}
 	conf.Global.PProf.Port = s.PProfPort
+	conf.Visibility.PersistenceCustomSearchAttributes = map[string]int{
+		"Text":        99,
+		"Keyword":     99,
+		"Int":         99,
+		"Double":      99,
+		"Bool":        99,
+		"Datetime":    99,
+		"KeywordList": 99,
+	}
 
 	// Persistence config
 	conf.Persistence.DefaultStore = "sqlite-default"
